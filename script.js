@@ -50,7 +50,7 @@ const btn=document.getElementById("t2-btn");
 btn.addEventListener("click",function() {
     const status=document.getElementById("t2-status");
     status.textContent="You clicked the button!";
-}
+});
 
 
 
@@ -80,7 +80,22 @@ Use:
 data.content   // the quote text
 data.author    // the author
 */
- 
+ // TODO3
+const quoteBtn = document.getElementById("t3-loadQuote");
+quoteBtn.addEventListener("click", async function () {
+  try {
+    const res = await fetch("https://dummyjson.com/quotes/random");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+
+    const data = await res.json();
+    document.getElementById("t3-quote").textContent = data.content;
+    document.getElementById("t3-author").textContent = "- " + data.author;
+  } catch (err) {
+    document.getElementById("t3-quote").textContent = "Error loading quote.";
+    document.getElementById("t3-author").textContent = "";
+  }
+});
+
 
 /*  
 =======================================
@@ -106,3 +121,4 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+
